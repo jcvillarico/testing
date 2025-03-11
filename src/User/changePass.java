@@ -141,6 +141,11 @@ public class changePass extends javax.swing.JFrame {
         jPanel1.add(oldpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 150, 30));
 
         newpass.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        newpass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newpassActionPerformed(evt);
+            }
+        });
         jPanel1.add(newpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 150, 30));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
@@ -246,9 +251,8 @@ public class changePass extends javax.swing.JFrame {
                 this.dispose();
             }else if(!newpass.equals(conpass)){
                 JOptionPane.showMessageDialog(null,"Password Doesn't Match!");
-                loginForm rr = new loginForm();
-                rr.setVisible(true);
-                this.dispose();
+                newpass.setText("");
+                conpass.setText("");
           }else{
             JOptionPane.showMessageDialog(null,"Old password Is Incorrect");
             }
@@ -262,6 +266,10 @@ public class changePass extends javax.swing.JFrame {
     private void changepassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changepassMouseClicked
         
     }//GEN-LAST:event_changepassMouseClicked
+
+    private void newpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newpassActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newpassActionPerformed
 
     /**
      * @param args the command line arguments

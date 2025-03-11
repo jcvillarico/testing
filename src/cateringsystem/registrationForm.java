@@ -300,7 +300,7 @@ public class registrationForm extends javax.swing.JFrame {
             ps.setText("");
             cps.setText("");  
         
-        }else if(!ps.equals(cps)){
+        }else if(!ps.getText().equals(cps.getText())){
             JOptionPane.showMessageDialog(null,"Password Doesn't Match!");
             
         

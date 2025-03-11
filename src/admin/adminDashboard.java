@@ -193,6 +193,7 @@ public class adminDashboard extends javax.swing.JFrame {
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
         loginForm lfm = new loginForm();
+        JOptionPane.showMessageDialog(null,"Log out");
         lfm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_logoutMouseClicked

@@ -222,8 +222,7 @@ public class loginForm extends javax.swing.JFrame {
                    
                JOptionPane.showMessageDialog(null,"Inactive Account.Contact the Admin!");
                
-               }
-                
+               }else{
                 if(type.equals("Admin")){
                     JOptionPane.showMessageDialog(null,"Login Success!");
                      adminDashboard ads = new adminDashboard();
@@ -238,10 +237,14 @@ public class loginForm extends javax.swing.JFrame {
                       JOptionPane.showMessageDialog(null,"No account type found. Contact the Admin!");
                 }
                
-          }else{
+               }
+              
+            }else{
                JOptionPane.showMessageDialog(null,"Invalid Account!");
-           
-           }
+                
+             
+               
+          }
     }//GEN-LAST:event_loginActionPerformed
 
     private void backtobackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backtobackActionPerformed

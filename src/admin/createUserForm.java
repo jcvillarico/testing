@@ -499,6 +499,8 @@ public class createUserForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Password should be 8 above!");
             ps1.setText("");
             cps1.setText("");
+        }else if(!em1.getText().matches("^.+@.+..com")){
+        JOptionPane.showMessageDialog(null,"Invalid Email format!");
 
         }else if(duplicateCheck()){
             System.out.println("Duplicate Exist!");
