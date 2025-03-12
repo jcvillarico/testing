@@ -52,7 +52,6 @@ public class accountDetails extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         ut = new javax.swing.JComboBox<>();
-        jScrollBar1 = new javax.swing.JScrollBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -166,7 +165,6 @@ public class accountDetails extends javax.swing.JFrame {
 
         ut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User" }));
         jPanel1.add(ut, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 150, -1));
-        jPanel1.add(jScrollBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(227, 280, 70, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -268,7 +266,6 @@ public class accountDetails extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JTextField ln;
     private javax.swing.JTextField un;
     private javax.swing.JComboBox<String> ut;
