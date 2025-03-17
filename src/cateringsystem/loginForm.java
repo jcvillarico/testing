@@ -95,6 +95,7 @@ public class loginForm extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         showpass = new javax.swing.JCheckBox();
+        forgot = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,13 +176,14 @@ public class loginForm extends javax.swing.JFrame {
         jPanel1.add(backtoback, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 310, 70, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel7.setText("Dont have an account? Click here to register");
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("CREATE NEW ACCOUNT");
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel7MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 340, 260, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 370, 220, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ble-removebg-preview.png"))); // NOI18N
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 240, 130));
@@ -196,6 +198,14 @@ public class loginForm extends javax.swing.JFrame {
             }
         });
         jPanel1.add(showpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, 150, -1));
+
+        forgot.setText("Forgot Password");
+        forgot.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                forgotMouseClicked(evt);
+            }
+        });
+        jPanel1.add(forgot, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 340, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -294,6 +304,12 @@ public class loginForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_showpassActionPerformed
 
+    private void forgotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_forgotMouseClicked
+        forgetPassDashboard fpd = new  forgetPassDashboard();
+        fpd.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_forgotMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -331,6 +347,7 @@ public class loginForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backtoback;
+    private javax.swing.JLabel forgot;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
