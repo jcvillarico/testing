@@ -232,35 +232,47 @@ public class changePass extends javax.swing.JFrame {
     }//GEN-LAST:event_oldpassActionPerformed
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-        try{
-        dbConnector dbc = new dbConnector();
-         Session sess = Session.getInstance();
-         
-     
-        String query = "SELECT * FROM tbl_user WHERE u_id = '"+sess.getUid()+"'";
-            ResultSet rs = dbc.getData(query);
-        if(rs.next()){
-            String olddbpass = rs.getString("u_password");
-            String oldhash = passwordHasher.hashPassword(oldpass.getText());
-            
-            if(olddbpass.equals(oldhash)){
-                String npass = passwordHasher.hashPassword(newpass.getText());
-                dbc.updateData("UPDATE tbl_user SET u_password ='"+npass+"'");
+       try {
+    dbConnector dbc = new dbConnector();
+    Session sess = Session.getInstance();
+
+    String query = "SELECT * FROM tbl_user WHERE u_id = '" + sess.getUid() + "'";
+    ResultSet rs = dbc.getData(query);
+
+    if (rs.next()) {
+        String olddbpass = rs.getString("u_password");
+
+        // Securely retrieve values from JPasswordFields
+       String oldInput = oldpass.getText();
+       String newInput = newpass.getText();
+       String confirmInput = conpass.getText();
+
+
+        // Hash the old password entered
+        String oldhash = passwordHasher.hashPassword(oldInput);
+
+        if (olddbpass.equals(oldhash)) {
+            if (newInput.equals(confirmInput)) {
+                String npass = passwordHasher.hashPassword(newInput);
+                dbc.updateData("UPDATE tbl_user SET u_password = '" + npass + "' WHERE u_id = '" + sess.getUid() + "'");
+
+                JOptionPane.showMessageDialog(null, "Password updated successfully!");
                 loginForm lg = new loginForm();
                 lg.setVisible(true);
                 this.dispose();
-            }else if(!newpass.equals(conpass)){
-                JOptionPane.showMessageDialog(null,"Password Doesn't Match!");
+            } else {
+                JOptionPane.showMessageDialog(null, "New password and Confirm password do not match!");
                 newpass.setText("");
                 conpass.setText("");
-          }else{
-            JOptionPane.showMessageDialog(null,"Old password Is Incorrect");
             }
-        
+        } else {
+            JOptionPane.showMessageDialog(null, "Old password is incorrect!");
+            oldpass.setText("");
         }
-        }catch(SQLException|NoSuchAlgorithmException ex){
-            System.out.println(""+ex);
-        }
+    }
+} catch (SQLException | NoSuchAlgorithmException ex) {
+    System.out.println("Error: " + ex.getMessage());
+}
     }//GEN-LAST:event_jPanel4MouseClicked
 
     private void changepassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changepassMouseClicked
