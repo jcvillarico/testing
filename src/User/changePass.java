@@ -183,6 +183,11 @@ public class changePass extends javax.swing.JFrame {
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 70, 30));
 
         jPanel6.setBackground(new java.awt.Color(204, 153, 0));
+        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel6MouseClicked(evt);
+            }
+        });
         jPanel6.setLayout(null);
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -260,7 +265,7 @@ public class changePass extends javax.swing.JFrame {
                 loginForm lg = new loginForm();
                 lg.setVisible(true);
                 this.dispose();
-            } else {
+            } else{
                 JOptionPane.showMessageDialog(null, "New password and Confirm password do not match!");
                 newpass.setText("");
                 conpass.setText("");
@@ -282,6 +287,12 @@ public class changePass extends javax.swing.JFrame {
     private void newpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newpassActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newpassActionPerformed
+
+    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+        accountDetails acd = new accountDetails();
+        acd.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jPanel6MouseClicked
 
     /**
      * @param args the command line arguments

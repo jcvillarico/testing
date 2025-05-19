@@ -164,6 +164,12 @@ public class accountDetails extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 80, 20));
 
         ut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User" }));
+        ut.setEnabled(false);
+        ut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                utActionPerformed(evt);
+            }
+        });
         jPanel1.add(ut, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -210,6 +216,10 @@ public class accountDetails extends javax.swing.JFrame {
         cp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_changepassMouseClicked
+
+    private void utActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_utActionPerformed
 
     /**
      * @param args the command line arguments

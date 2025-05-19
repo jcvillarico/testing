@@ -7,8 +7,20 @@ package admin;
 
 import config.dbConnector;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +35,88 @@ public class createUserForm extends javax.swing.JFrame {
     public createUserForm() {
         initComponents();
     }
+    
+    public String destination ="";
+    File selectedFile;
+    public String oldpath;
+    public String path;
+    
+    public int FileExistenceChecker(String path){
+        File file = new File(path);
+        String fileName = file.getName();
+        
+        Path filePath = Paths.get("src/userimages", fileName);
+        boolean fileExists = Files.exists(filePath);
+        
+        if (fileExists) {
+            return 1;
+        } else {
+            return 0;
+        }
+    
+    }
+    
+    public static int getHeightFromWidth(String imagePath, int desiredWidth) {
+        try {
+            // Read the image file
+            File imageFile = new File(imagePath);
+            BufferedImage image = ImageIO.read(imageFile);
+            
+            // Get the original width and height of the image
+            int originalWidth = image.getWidth();
+            int originalHeight = image.getHeight();
+            
+            // Calculate the new height based on the desired width and the aspect ratio
+            int newHeight = (int) ((double) desiredWidth / originalWidth * originalHeight);
+            
+            return newHeight;
+        } catch (IOException ex) {
+            System.out.println("No image found!");
+        }
+        
+        return -1;
+    }
+
+    public  ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
+    ImageIcon MyImage = null;
+        if(ImagePath !=null){
+            MyImage = new ImageIcon(ImagePath);
+        }else{
+            MyImage = new ImageIcon(pic);
+        }
+        
+    int newHeight = getHeightFromWidth(ImagePath, label.getWidth());
+
+    Image img = MyImage.getImage();
+    Image newImg = img.getScaledInstance(label.getWidth(), newHeight, Image.SCALE_SMOOTH);
+    ImageIcon image = new ImageIcon(newImg);
+    return image;
+}
+    
+      public void imageUpdater(String existingFilePath, String newFilePath){
+        File existingFile = new File(existingFilePath);
+        if (existingFile.exists()) {
+            String parentDirectory = existingFile.getParent();
+            File newFile = new File(newFilePath);
+            String newFileName = newFile.getName();
+            File updatedFile = new File(parentDirectory, newFileName);
+            existingFile.delete();
+            try {
+                Files.copy(newFile.toPath(), updatedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Image updated successfully.");
+            } catch (IOException e) {
+                System.out.println("Error occurred while updating the image: "+e);
+            }
+        } else {
+            try{
+                Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }catch(IOException e){
+                System.out.println("Error on update!");
+            }
+        }
+   } 
+
+            
     public boolean duplicateCheck(){
         String email;
         String usname;
@@ -120,6 +214,7 @@ public class createUserForm extends javax.swing.JFrame {
         contact = new javax.swing.JTextField();
         cancel = new javax.swing.JButton();
         register = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -149,6 +244,11 @@ public class createUserForm extends javax.swing.JFrame {
         userrefresh = new javax.swing.JButton();
         userclear = new javax.swing.JButton();
         userdelete = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        image = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        select = new javax.swing.JButton();
+        remove = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
 
         fn.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -237,6 +337,8 @@ public class createUserForm extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 102, 0));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -254,6 +356,7 @@ public class createUserForm extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, 0, 440, 50));
 
+        userID.setBackground(new java.awt.Color(153, 153, 0));
         userID.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         userID.setEnabled(false);
         userID.addActionListener(new java.awt.event.ActionListener() {
@@ -274,6 +377,7 @@ public class createUserForm extends javax.swing.JFrame {
         jLabel15.setText("Last Name:");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 80, 30));
 
+        ln1.setBackground(new java.awt.Color(153, 153, 0));
         ln1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         ln1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,6 +386,7 @@ public class createUserForm extends javax.swing.JFrame {
         });
         getContentPane().add(ln1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 150, 30));
 
+        em1.setBackground(new java.awt.Color(153, 153, 0));
         em1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         em1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -300,10 +405,17 @@ public class createUserForm extends javax.swing.JFrame {
         jLabel17.setText("Username:");
         getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 80, 30));
 
+        un1.setBackground(new java.awt.Color(153, 153, 0));
         un1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         getContentPane().add(un1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 150, 30));
 
+        ut1.setBackground(new java.awt.Color(153, 153, 0));
         ut1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User" }));
+        ut1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ut1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(ut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 150, -1));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -314,8 +426,18 @@ public class createUserForm extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel18.setText("Password:");
         getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 80, 30));
+
+        ps1.setBackground(new java.awt.Color(153, 153, 0));
+        ps1.setEnabled(false);
+        ps1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ps1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(ps1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 150, 30));
 
+        cps1.setBackground(new java.awt.Color(153, 153, 0));
+        cps1.setEnabled(false);
         cps1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cps1ActionPerformed(evt);
@@ -333,6 +455,7 @@ public class createUserForm extends javax.swing.JFrame {
         jLabel20.setText("Contact Num:");
         getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 100, 30));
 
+        contact1.setBackground(new java.awt.Color(153, 153, 0));
         contact1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         getContentPane().add(contact1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 150, 30));
 
@@ -353,13 +476,15 @@ public class createUserForm extends javax.swing.JFrame {
         });
         getContentPane().add(add, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 90, -1));
 
+        us.setBackground(new java.awt.Color(153, 153, 0));
         us.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Pending" }));
-        getContentPane().add(us, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 150, -1));
+        getContentPane().add(us, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, 120, -1));
 
         jLabel21.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel21.setText("User Status:");
         getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 90, 20));
 
+        fn1.setBackground(new java.awt.Color(153, 153, 0));
         fn1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         getContentPane().add(fn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 150, 30));
 
@@ -454,6 +579,49 @@ public class createUserForm extends javax.swing.JFrame {
         });
         getContentPane().add(userdelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 90, -1));
 
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 120));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, 110, 120));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("IMAGE");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, -1, -1));
+
+        select.setText("SELECT");
+        select.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                selectMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                selectMouseExited(evt);
+            }
+        });
+        select.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectActionPerformed(evt);
+            }
+        });
+        getContentPane().add(select, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 410, 80, -1));
+
+        remove.setText("REMOVE");
+        remove.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                removeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                removeMouseExited(evt);
+            }
+        });
+        remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, 80, -1));
+
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/hala.png"))); // NOI18N
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, -1, 390));
 
@@ -553,19 +721,27 @@ public class createUserForm extends javax.swing.JFrame {
             System.out.println("Duplicate Exist!");
 
         }else{
+            
+     
             dbConnector dbc = new dbConnector();
 
-            if(dbc.insertData("INSERT INTO tbl_user(u_fname,u_lname,u_type,u_email,u_username,u_contact,u_password,u_cpassword,u_status)"
-                + "VALUES('"+fn1.getText()+"','"+ln1.getText()+"','"+ut1.getSelectedItem()+"','"+em1.getText()+"','"+un1.getText()+"','"+contact1.getText()+"','"+ps1.getText()+"','"+cps1.getText()+"','"+us.getSelectedItem()+"')"))
+            if(dbc.insertData("INSERT INTO tbl_user(u_fname,u_lname,u_type,u_email,u_username,u_contact,u_password,u_cpassword,u_status,u_image)"
+                + "VALUES('"+fn1.getText()+"','"+ln1.getText()+"','"+ut1.getSelectedItem()+"','"+em1.getText()+"','"+un1.getText()+"','"+contact1.getText()+"','"+ps1.getText()+"','"+cps1.getText()+"','"+us.getSelectedItem()+"','"+destination+"')"))
         {
+            try{
+            Files.copy(selectedFile.toPath(),new File(destination).toPath(),StandardCopyOption.REPLACE_EXISTING);
             JOptionPane.showMessageDialog(null,"Inserted Successfully");
             usersForm uf = new usersForm();
             uf.setVisible(true);
             this.dispose();
+            }catch(IOException ex){
+                System.out.println("Insert Image Error:"+ex);
+            }
         }else{
             JOptionPane.showMessageDialog(null,"Connection Error!");
         }
         }
+    
 
     }//GEN-LAST:event_addActionPerformed
 
@@ -614,9 +790,18 @@ public class createUserForm extends javax.swing.JFrame {
     dbc.updateData("UPDATE tbl_user SET u_fname = '"+fn1.getText()+"',u_lname ='"+ln1.getText()+"',"
             + "u_type ='"+ut.getSelectedItem()+"',u_email = '"+em1.getText()+"',u_username = '"+un1.getText()+"',"
                     + "u_contact = '"+contact1.getText()+"',u_password ='"+ps1.getText()+"',u_cpassword='"+cps1.getText()+"',"
-                            + "u_status='"+us.getSelectedItem()+"'WHERE u_id = '"+userID.getText()+"'");
+                            + "u_status='"+us.getSelectedItem()+"',u_image='"+destination+"'WHERE u_id = '"+userID.getText()+"'");
     
-               
+                if(destination.isEmpty()){
+                    File existingFile=new File(oldpath);
+                    if(existingFile.exists()){
+                        existingFile.delete();
+                    }
+                }else{
+                    if(!(oldpath.equals(path))){
+                        imageUpdater(oldpath,path);
+                    }
+                }
                 usersForm uf = new usersForm();
                 uf.setVisible(true);
                 this.dispose();
@@ -632,7 +817,7 @@ public class createUserForm extends javax.swing.JFrame {
     }//GEN-LAST:event_userrefreshMouseExited
 
     private void userrefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userrefreshActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_userrefreshActionPerformed
 
     private void userclearMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userclearMouseEntered
@@ -662,6 +847,64 @@ public class createUserForm extends javax.swing.JFrame {
     private void ln1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ln1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ln1ActionPerformed
+
+    private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
+          JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        selectedFile = fileChooser.getSelectedFile();
+                        destination = "src/userimages/" + selectedFile.getName();
+                        path  = selectedFile.getAbsolutePath();
+                        
+                        
+                        if(FileExistenceChecker(path) == 1){
+                          JOptionPane.showMessageDialog(null, "File Already Exist, Rename or Choose another!");
+                            destination = "";
+                            path="";
+                        }else{
+                            image.setIcon(ResizeImage(path, null, image));
+                            select.setEnabled(false);
+                            remove.setEnabled(true);
+                            
+                        }
+                    } catch (Exception ex) {
+                        System.out.println("File Error!");
+                    }
+                }
+    }//GEN-LAST:event_selectActionPerformed
+
+    private void selectMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectMouseEntered
+        select.setBackground(hovercolor);
+    }//GEN-LAST:event_selectMouseEntered
+
+    private void selectMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectMouseExited
+        select.setBackground(navcolor);
+    }//GEN-LAST:event_selectMouseExited
+
+    private void removeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeMouseEntered
+        remove.setBackground(hovercolor);
+    }//GEN-LAST:event_removeMouseEntered
+
+    private void removeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeMouseExited
+       remove.setBackground(navcolor);
+    }//GEN-LAST:event_removeMouseExited
+
+    private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
+      remove.setEnabled(false);
+      select.setEnabled(true);
+      image.setIcon(null);
+      destination = "";
+      path = "";
+    }//GEN-LAST:event_removeActionPerformed
+
+    private void ps1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ps1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ps1ActionPerformed
+
+    private void ut1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ut1ActionPerformed
+        
+    }//GEN-LAST:event_ut1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -709,6 +952,9 @@ public class createUserForm extends javax.swing.JFrame {
     public javax.swing.JTextField em1;
     private javax.swing.JTextField fn;
     public javax.swing.JTextField fn1;
+    public javax.swing.JLabel image;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -731,11 +977,14 @@ public class createUserForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField ln;
     public javax.swing.JTextField ln1;
     private javax.swing.JPasswordField ps;
     public javax.swing.JPasswordField ps1;
     private javax.swing.JButton register;
+    public javax.swing.JButton remove;
+    public javax.swing.JButton select;
     private javax.swing.JTextField un;
     public javax.swing.JTextField un1;
     public javax.swing.JComboBox<String> us;

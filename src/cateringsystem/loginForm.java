@@ -126,6 +126,7 @@ public class loginForm extends javax.swing.JFrame {
         jLabel5.setText("Username:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 80, 30));
 
+        user.setBackground(new java.awt.Color(153, 153, 0));
         user.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,6 +135,7 @@ public class loginForm extends javax.swing.JFrame {
         });
         jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, 150, 30));
 
+        pass.setBackground(new java.awt.Color(153, 153, 0));
         pass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passActionPerformed(evt);
@@ -235,11 +237,13 @@ public class loginForm extends javax.swing.JFrame {
                }else{
                 if(type.equals("Admin")){
                     JOptionPane.showMessageDialog(null,"Login Success!");
+                    JOptionPane.showMessageDialog(null,"!Remember your Email incase you forgot!");
                      adminDashboard ads = new adminDashboard();
                      ads.setVisible(true);
                      this.dispose();
                 }else if(type.equals("User")){
                     JOptionPane.showMessageDialog(null,"Login Success!");
+                    JOptionPane.showMessageDialog(null,"!Remember your Email incase you forgot!");
                     userDashboard usd = new userDashboard();
                      usd.setVisible(true);
                      this.dispose();

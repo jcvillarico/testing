@@ -35,7 +35,7 @@ public class adminDashboard extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         exit = new javax.swing.JLabel();
-        logout = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -76,14 +76,14 @@ public class adminDashboard extends javax.swing.JFrame {
         });
         jPanel2.add(exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 30));
 
-        logout.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        logout.setText("LOG OUT");
-        logout.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                logoutMouseClicked(evt);
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setText("LOG OUT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, 70, -1));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 90, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 50));
 
@@ -159,6 +159,11 @@ public class adminDashboard extends javax.swing.JFrame {
         jPanel1.add(userdashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, 170, 150));
 
         jPanel5.setBackground(new java.awt.Color(153, 102, 0));
+        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel5MouseClicked(evt);
+            }
+        });
         jPanel5.setLayout(null);
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/booklist_icon_edit-removebg-preview (1) edit.png"))); // NOI18N
@@ -191,13 +196,6 @@ public class adminDashboard extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_exitMouseClicked
 
-    private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
-        loginForm lfm = new loginForm();
-        JOptionPane.showMessageDialog(null,"Log out");
-        lfm.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_logoutMouseClicked
-
     private void userdashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userdashboardMouseClicked
         usersForm usf = new usersForm();
         usf.setVisible(true);
@@ -223,6 +221,19 @@ public class adminDashboard extends javax.swing.JFrame {
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+        eventDashboard etd = new eventDashboard();
+        etd.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jPanel5MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        loginForm lfr = new loginForm();
+       lfr.setVisible(true);
+        System.out.println("LOG OUT");
+       this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,6 +275,7 @@ public class adminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel acc_lname;
     private javax.swing.JLabel acc_name;
     private javax.swing.JLabel exit;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -276,7 +288,6 @@ public class adminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JLabel logout;
     private javax.swing.JPanel userdashboard;
     // End of variables declaration//GEN-END:variables
 }
