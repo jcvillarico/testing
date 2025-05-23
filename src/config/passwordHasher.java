@@ -8,6 +8,7 @@ package config;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import javax.swing.JTextField;
 
 /**
  *
@@ -19,6 +20,10 @@ public class passwordHasher {
         byte[] hashBytes = md.digest(password.getBytes());
         String encoded = Base64.getEncoder().encodeToString(hashBytes);
         return encoded;
+    }
+
+    public static String hashPassword(JTextField ans) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

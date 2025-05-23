@@ -118,7 +118,7 @@ public class changePass extends javax.swing.JFrame {
 
         acc_ln.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         acc_ln.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        acc_ln.setText("User");
+        acc_ln.setText("Client");
         jPanel3.add(acc_ln, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 150, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 460));

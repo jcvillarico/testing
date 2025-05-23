@@ -17,6 +17,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.NoSuchAlgorithmException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.imageio.ImageIO;
@@ -178,14 +179,11 @@ public class registrationForm extends javax.swing.JFrame {
         fn = new javax.swing.JTextField();
         ln = new javax.swing.JTextField();
         em = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         ps = new javax.swing.JPasswordField();
         ut = new javax.swing.JComboBox<>();
         register = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         cps = new javax.swing.JPasswordField();
         un = new javax.swing.JTextField();
@@ -194,8 +192,13 @@ public class registrationForm extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         SELECT = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         image = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        ans = new javax.swing.JTextField();
+        sqq = new javax.swing.JComboBox<>();
 
         cps1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,21 +212,23 @@ public class registrationForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 153, 0));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(153, 102, 0));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("WELCOME TO CATERING SERVICE SYSTEM");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 410, 30));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 920, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, 0, 860, 50));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, 0, 990, 50));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("User Type:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, 80, 20));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 80, 20));
 
         contact.setBackground(new java.awt.Color(153, 153, 0));
         contact.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -232,30 +237,35 @@ public class registrationForm extends javax.swing.JFrame {
                 contactActionPerformed(evt);
             }
         });
-        jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 370, 150, 30));
+        jPanel1.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 150, 30));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("First Name:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 80, 30));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 80, 30));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel8.setText("Last Name:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 80, 30));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, 80, 30));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel9.setText("Email:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 80, 30));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 80, 30));
 
         fn.setBackground(new java.awt.Color(153, 153, 0));
         fn.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jPanel1.add(fn, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, 150, 30));
+        fn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(fn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 150, 30));
 
         ln.setBackground(new java.awt.Color(153, 153, 0));
         ln.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jPanel1.add(ln, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 150, 30));
+        jPanel1.add(ln, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, 150, 30));
 
         em.setBackground(new java.awt.Color(153, 153, 0));
         em.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -264,17 +274,12 @@ public class registrationForm extends javax.swing.JFrame {
                 emActionPerformed(evt);
             }
         });
-        jPanel1.add(em, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, 150, 30));
-
-        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel10.setText("Username:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, 80, 30));
+        jPanel1.add(em, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, 150, 30));
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel11.setText("Password:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 290, 80, 30));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 80, 30));
 
         ps.setBackground(new java.awt.Color(153, 153, 0));
         ps.addActionListener(new java.awt.event.ActionListener() {
@@ -282,11 +287,16 @@ public class registrationForm extends javax.swing.JFrame {
                 psActionPerformed(evt);
             }
         });
-        jPanel1.add(ps, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, 150, 30));
+        jPanel1.add(ps, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 100, 150, 30));
 
         ut.setBackground(new java.awt.Color(153, 153, 0));
-        ut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User" }));
-        jPanel1.add(ut, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, 150, -1));
+        ut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User", "Client" }));
+        ut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                utActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ut, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, 150, -1));
 
         register.setBackground(new java.awt.Color(153, 102, 0));
         register.setText("Register");
@@ -303,7 +313,7 @@ public class registrationForm extends javax.swing.JFrame {
                 registerActionPerformed(evt);
             }
         });
-        jPanel1.add(register, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 410, -1, -1));
+        jPanel1.add(register, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 340, -1, -1));
 
         cancel.setBackground(new java.awt.Color(153, 102, 0));
         cancel.setText("Cancel");
@@ -320,20 +330,12 @@ public class registrationForm extends javax.swing.JFrame {
                 cancelActionPerformed(evt);
             }
         });
-        jPanel1.add(cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 410, 70, -1));
-
-        jPanel3.setBackground(new java.awt.Color(204, 153, 0));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Catering-logo-vector-icon-illustration-Graphics-68140048-1-removebg-preview.png"))); // NOI18N
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-110, 30, 510, 300));
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 370, 390));
+        jPanel1.add(cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 340, 70, -1));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel12.setText("Confirm Pass:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 330, 100, 30));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 100, 30));
 
         cps.setBackground(new java.awt.Color(153, 153, 0));
         cps.addActionListener(new java.awt.event.ActionListener() {
@@ -341,11 +343,11 @@ public class registrationForm extends javax.swing.JFrame {
                 cpsActionPerformed(evt);
             }
         });
-        jPanel1.add(cps, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 330, 150, 30));
+        jPanel1.add(cps, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 140, 150, 30));
 
         un.setBackground(new java.awt.Color(153, 153, 0));
         un.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jPanel1.add(un, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 150, 30));
+        jPanel1.add(un, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 150, 30));
 
         showpassreg.setText("Show Pass");
         showpassreg.addActionListener(new java.awt.event.ActionListener() {
@@ -353,16 +355,16 @@ public class registrationForm extends javax.swing.JFrame {
                 showpassregActionPerformed(evt);
             }
         });
-        jPanel1.add(showpassreg, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 240, 100, 30));
+        jPanel1.add(showpassreg, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 60, 100, 30));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel6.setText("Contact Num:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, 100, 30));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, 100, 30));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel4.setText("Register Now!");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 140, 30));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 140, 30));
 
         SELECT.setText("PHOTO");
         SELECT.addActionListener(new java.awt.event.ActionListener() {
@@ -370,25 +372,51 @@ public class registrationForm extends javax.swing.JFrame {
                 SELECTActionPerformed(evt);
             }
         });
-        jPanel1.add(SELECT, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 410, -1, -1));
+        jPanel1.add(SELECT, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 410, -1, -1));
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel4.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 120));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 280, 110, 120));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 280, 110, 120));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Catering-logo-vector-icon-illustration-Graphics-68140048-1-removebg-preview.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 160, 490, 250));
+        jPanel1.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 280, 110, 120));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/hala.png"))); // NOI18N
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 420, 390));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 390, 400));
+
+        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel14.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel14.setText("Username:");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 220, 80, 30));
+
+        jLabel5.setText("Questioner:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 184, 80, 20));
+
+        ans.setBackground(new java.awt.Color(153, 153, 0));
+        ans.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ansActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ans, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 220, 150, 30));
+
+        sqq.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "What is your favorite food?", "What is your favorite pet?", "Whats is your secret ability?" }));
+        sqq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sqqActionPerformed(evt);
+            }
+        });
+        jPanel1.add(sqq, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 180, 150, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -397,50 +425,77 @@ public class registrationForm extends javax.swing.JFrame {
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
         
-        if(fn.getText().isEmpty()||ln.getText().isEmpty()||em.getText().isEmpty()
-                ||contact.getText().isEmpty()||ps.getText().isEmpty()||cps.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"All fields are Required!");  
-        
-        }else if(ps.getText().length()<8){
-            JOptionPane.showMessageDialog(null,"Password should be 8 above!");
-            ps.setText("");
-            cps.setText("");  
-        
-        }else if(!ps.getText().equals(cps.getText())){
-            JOptionPane.showMessageDialog(null,"Password Doesn't Match!");
-            
-        
-        }else if(!em.getText().matches("^.+@.+..com")){
-            JOptionPane.showMessageDialog(null,"Invalid Email format!");
-            
-            
-        }else if(!contact.getText().matches("\\d{11}")){
-            JOptionPane.showMessageDialog(null,"Contact number Must be only numbers!");
-            JOptionPane.showMessageDialog(null,"Type atleast 11 numbers!");
-            
-        
-        }else if(duplicateCheck()){
-            System.out.println("Duplicate Exist!");
-        
-        }else{
-             dbConnector dbc = new dbConnector();
-             try{
-             String pass = passwordHasher.hashPassword(ps.getText());
-             String cpass = passwordHasher.hashPassword(cps.getText());
-        if(dbc.insertData("INSERT INTO tbl_user(u_fname,u_lname,u_type,u_email,u_username,u_contact,u_password,u_cpassword,u_status,u_image)"
-                + "VALUES('"+fn.getText()+"','"+ln.getText()+"','"+ut.getSelectedItem()+"','"+em.getText()+"','"+un.getText()+"','"+contact.getText()+"','"+pass+"','"+cpass+"','"+SELECT.getText()+"','Undecided')"))
-        {
-            JOptionPane.showMessageDialog(null,"Inserted Successfully");
+if (fn.getText().isEmpty() || ln.getText().isEmpty() || un.getText().isEmpty() || em.getText().isEmpty()
+    || contact.getText().isEmpty() || ps.getText().isEmpty() || cps.getText().isEmpty() || ans.getText().isEmpty()) {
+
+    JOptionPane.showMessageDialog(null, "All fields are required!");
+
+} else if (ps.getText().length() < 8) {
+    JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long.");
+    ps.setText("");
+    cps.setText(""); 
+
+} else if (!ps.getText().equals(cps.getText())) {
+    JOptionPane.showMessageDialog(null, "Passwords do not match.");
+    ps.setText("");
+    cps.setText(""); 
+
+} else if (!em.getText().matches("^.+@.+\\..{2,}$")) {
+    JOptionPane.showMessageDialog(null, "Invalid email format.");
+    em.setText("");
+
+} else if (!contact.getText().matches("\\d{11}")) {
+    JOptionPane.showMessageDialog(null, "Contact number must contain only digits and be 11 digits long.");
+    contact.setText("");
+
+} else if (duplicateCheck()) {
+    System.out.println("Duplicate Exist!");
+
+} else {
+    dbConnector dbc = new dbConnector();
+
+    try {
+        String hashedPass = passwordHasher.hashPassword(ps.getText());
+        String hashedCpass = passwordHasher.hashPassword(cps.getText());
+        String hashedAnswer = passwordHasher.hashPassword(ans.getText());
+        String status = "Pending"; // or SELECT.getText() if needed
+        String image = "Undecided";
+        String question = sqq.getSelectedItem().toString();
+
+        String sql = "INSERT INTO tbl_user (u_fname, u_lname, u_type, u_email, u_username, u_contact, u_password, u_cpassword, u_status, u_image, u_question, u_answer) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        PreparedStatement pst = dbc.connect.prepareStatement(sql);
+        pst.setString(1, fn.getText());
+        pst.setString(2, ln.getText());
+        pst.setString(3, ut.getSelectedItem().toString());
+        pst.setString(4, em.getText());
+        pst.setString(5, un.getText());
+        pst.setString(6, contact.getText());
+        pst.setString(7, hashedPass);
+        pst.setString(8, hashedCpass);
+        pst.setString(9, status);
+        pst.setString(10, image);
+        pst.setString(11, question);
+        pst.setString(12, hashedAnswer);
+
+        int inserted = pst.executeUpdate();
+
+        if (inserted > 0) {
+            JOptionPane.showMessageDialog(null, "Inserted Successfully!");
             loginForm lfr = new loginForm();
             lfr.setVisible(true);
             this.dispose();
-    }else{
-            JOptionPane.showMessageDialog(null,"Connection Error!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Connection Error!");
         }
-          }catch(NoSuchAlgorithmException ex){
-                 System.out.println(""+ex);
-          }
-        }
+
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "An error occurred: " + ex.getMessage());
+    }
+}
+
         
        
       
@@ -448,7 +503,7 @@ public class registrationForm extends javax.swing.JFrame {
     }//GEN-LAST:event_registerActionPerformed
 
     private void cps1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cps1ActionPerformed
-        // TODO add your handling code here:
+        // TODO ad d your handling code here:
     }//GEN-LAST:event_cps1ActionPerformed
 
     private void cpsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpsActionPerformed
@@ -523,16 +578,41 @@ public class registrationForm extends javax.swing.JFrame {
                         }
                     } catch (Exception ex) {
                         System.out.println("File Error!");
-                    }
-                }
+                    
+                    }}
     }//GEN-LAST:event_SELECTActionPerformed
+
+    private void utActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_utActionPerformed
+
+    private void fnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fnActionPerformed
+
+    private void answerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_answerActionPerformed
+
+    private void sqqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sqqActionPerformed
+            System.out.println("Security question changed: " + sqq.getSelectedItem());
+
+    }//GEN-LAST:event_sqqActionPerformed
+
+    private void sqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void ansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ansActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ansActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+                //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
@@ -564,6 +644,7 @@ public class registrationForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton SELECT;
+    private javax.swing.JTextField ans;
     private javax.swing.JButton cancel;
     private javax.swing.JTextField contact;
     private javax.swing.JPasswordField cps;
@@ -574,25 +655,26 @@ public class registrationForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField ln;
     private javax.swing.JPasswordField ps;
     private javax.swing.JButton register;
     private javax.swing.JCheckBox showpassreg;
+    private javax.swing.JComboBox<String> sqq;
     private javax.swing.JTextField un;
     private javax.swing.JComboBox<String> ut;
     // End of variables declaration//GEN-END:variables

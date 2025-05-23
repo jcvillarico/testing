@@ -5,8 +5,10 @@
  */
 package admin;
 
+import User.clientsForm;
 import cateringsystem.loginForm;
 import config.Session;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +23,8 @@ public class adminDashboard extends javax.swing.JFrame {
     public adminDashboard() {
         initComponents();
     }
+    Color navcolor = new Color(153,102,0);
+    Color hovercolor = new Color(255,4,4);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,11 +41,11 @@ public class adminDashboard extends javax.swing.JFrame {
         exit = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         acc_name = new javax.swing.JLabel();
         acc_lname = new javax.swing.JLabel();
         acc_email = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         userdashboard = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -90,10 +94,12 @@ public class adminDashboard extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ble-removebg-preview.png"))); // NOI18N
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 170, 230, 210));
-
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/adminpp_edit-removebg-preview.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, -10, 110, 120));
 
         acc_name.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -110,6 +116,9 @@ public class adminDashboard extends javax.swing.JFrame {
         acc_email.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         acc_email.setText("ADMIN");
         jPanel3.add(acc_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 170, 20));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ble-removebg-preview.png"))); // NOI18N
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -10, 230, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 170, 380));
 
@@ -206,16 +215,19 @@ public class adminDashboard extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         Session sess = Session.getInstance();
-        if(sess.getUid()==0){
-            JOptionPane.showMessageDialog(null,"No Account found");
-            loginForm lf= new loginForm();
-            lf.setVisible(true);
-            this.dispose();
-        }else{
-            acc_name.setText(""+sess.getFname());
-            acc_lname.setText(""+sess.getLname());
-            acc_email.setText(""+sess.getEmail());
+        if(sess.getUid() == 0){
+        JOptionPane.showMessageDialog(null,"No Account, Log in first!");
+        loginForm lfr = new loginForm();
+        lfr.setVisible(true);
+        this.dispose();    
+      }else{
+           acc_name.setText(""+sess.getFname()); 
+           acc_lname.setText(""+sess.getFname());
+           acc_email.setText(""+sess.getFname());
+           
         }
+
+       
     }//GEN-LAST:event_formWindowActivated
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
@@ -223,8 +235,8 @@ public class adminDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-        eventDashboard etd = new eventDashboard();
-        etd.setVisible(true);
+        clientsForm cf = new clientsForm();
+        cf.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jPanel5MouseClicked
 
@@ -234,6 +246,10 @@ public class adminDashboard extends javax.swing.JFrame {
         System.out.println("LOG OUT");
        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments

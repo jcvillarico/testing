@@ -5,8 +5,10 @@
  */
 package cateringsystem;
 
+import User.UsersDashboard;
 import User.userDashboard;
 import admin.adminDashboard;
+import admin.eventDashboard;
 import admin.usersForm;
 import config.Session;
 import config.dbConnector;
@@ -241,12 +243,19 @@ public class loginForm extends javax.swing.JFrame {
                      adminDashboard ads = new adminDashboard();
                      ads.setVisible(true);
                      this.dispose();
-                }else if(type.equals("User")){
+                }else if(type.equals("Client")){
                     JOptionPane.showMessageDialog(null,"Login Success!");
                     JOptionPane.showMessageDialog(null,"!Remember your Email incase you forgot!");
                     userDashboard usd = new userDashboard();
                      usd.setVisible(true);
                      this.dispose();
+                }else if(type.equals("User")){
+                    JOptionPane.showMessageDialog(null,"Login Success!");
+                    UsersDashboard edb = new UsersDashboard();
+                    edb.setVisible(true);
+                    this.dispose();
+                    
+                    
                 }else{
                       JOptionPane.showMessageDialog(null,"No account type found. Contact the Admin!");
                 }
@@ -309,7 +318,7 @@ public class loginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_showpassActionPerformed
 
     private void forgotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_forgotMouseClicked
-        forgetPassDashboard fpd = new  forgetPassDashboard();
+        forgotPassword fpd = new  forgotPassword();
         fpd.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_forgotMouseClicked

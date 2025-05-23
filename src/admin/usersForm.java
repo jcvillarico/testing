@@ -73,6 +73,8 @@ public class usersForm extends javax.swing.JFrame {
         p_add = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        PRINT = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         p_edit = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -119,7 +121,7 @@ public class usersForm extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Catering-logo-vector-icon-illustration-Graphics-68140048-1-removebg-preview.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 450, 240));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 450, 240));
 
         usersTable.setBackground(new java.awt.Color(255, 204, 0));
         usersTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -151,7 +153,7 @@ public class usersForm extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Current User:");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 170, -1));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 170, 10));
 
         p_add.setBackground(new java.awt.Color(153, 102, 0));
         p_add.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -179,6 +181,28 @@ public class usersForm extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("USER");
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 160, -1));
+
+        PRINT.setBackground(new java.awt.Color(153, 102, 0));
+        PRINT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PRINTMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PRINTMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PRINTMouseExited(evt);
+            }
+        });
+        PRINT.setLayout(null);
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("PRINT");
+        PRINT.add(jLabel8);
+        jLabel8.setBounds(0, 10, 160, 10);
+
+        jPanel3.add(PRINT, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 160, 30));
 
         p_edit.setBackground(new java.awt.Color(153, 102, 0));
         p_edit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -314,6 +338,49 @@ public class usersForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_p_editMouseClicked
 
+    private void PRINTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PRINTMouseClicked
+         int rowIndex = usersTable.getSelectedRow();
+        
+        if(rowIndex<0){
+        JOptionPane.showMessageDialog(null,"Select an Item!");
+        }else{
+        try{    
+        
+        dbConnector dbc = new dbConnector(); 
+        TableModel tbl = usersTable.getModel();
+        ResultSet rs = dbc.getData("SELECT * FROM tbl_user WHERE u_id = '"+tbl.getValueAt(rowIndex,0)+"'");
+        if(rs.next()){
+        individualPrinting ipt = new individualPrinting();
+        ipt.uid.setText(""+rs.getInt("u_id"));
+        ipt.fn.setText(""+rs.getString("u_fname"));
+        ipt.ln.setText(""+rs.getString("u_lname"));
+        ipt.email.setText(""+rs.getString("u_email"));
+        ipt.uname.setText(""+rs.getString("u_username"));
+        ipt.ut.setText(""+rs.getString("u_type"));
+        ipt.us.setText(""+rs.getString("u_status"));
+        
+        ipt.image.setIcon(ipt.ResizeImage(rs.getString("u_image"), null,ipt.image));
+        ipt.setVisible(true);
+        this.dispose();
+        
+      
+        this.dispose();
+        }
+        }catch(SQLException ex){
+            System.out.println(""+ex);
+        }
+        
+        }
+    }//GEN-LAST:event_PRINTMouseClicked
+
+    private void PRINTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PRINTMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PRINTMouseEntered
+
+    private void PRINTMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PRINTMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PRINTMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -350,6 +417,7 @@ public class usersForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PRINT;
     private javax.swing.JLabel acc_id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -358,6 +426,7 @@ public class usersForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
